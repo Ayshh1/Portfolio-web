@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*.{html,css,js,mp4,webm}",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/work",
+      "dest": "/work.html"
+    },
+    {
+      "src": "/experience",
+      "dest": "/experience.html"
+    },
+    {
+      "src": "/stack",
+      "dest": "/stack.html"
+    }
+  ]
+}

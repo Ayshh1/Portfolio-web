@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AYESHA.DEV | Projects</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#8ff5ff",
+          "secondary": "#d674ff",
+          "tertiary": "#ac89ff",
+          "background": "#050508",
+          "surface": "#0e0e13",
+          "on-surface": "#f9f5fd",
+          "on-surface-variant": "#acaab1",
+          "outline-variant": "#48474d",
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Manrope"],
+          "label": ["Manrope"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body {
+    background-color: #050508;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(143, 245, 255, 0.03) 0%, transparent 50%),
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-in-out;
+  }
+
+  .page-transition.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  a {
+    transition: all 0.3s ease;
+  }
+  .glass-card {
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(143, 245, 255, 0.1);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(143, 245, 255, 0.2), transparent, rgba(214, 116, 255, 0.2));
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0.5;
+  }
+  .glass-card:hover {
+    border-color: rgba(143, 245, 255, 0.4);
+    box-shadow: 0 0 30px rgba(143, 245, 255, 0.1);
+    transform: translateY(-4px);
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, #8ff5ff 0%, #ac89ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .terminal-btn {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(143, 245, 255, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+  .terminal-btn:hover {
+    background: rgba(143, 245, 255, 0.1);
+    border-color: #8ff5ff;
+    color: #8ff5ff;
+    box-shadow: 0 0 15px rgba(143, 245, 255, 0.2);
+  }
+  .status-tag {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 2px 8px;
+    background: rgba(143, 245, 255, 0.05);
+    border-left: 2px solid #8ff5ff;
+  }
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.4);
+    transition: all 1s ease;
+  }
+  .group:hover .project-img {
+    filter: grayscale(0) brightness(0.7);
+    transform: scale(1.05);
+  }
+  /* Placeholder gradient backgrounds for project images */
+  .bg-bidswap {
+    background: linear-gradient(135deg, #0e0e1a 0%, #1a0a2e 50%, #0a1a2e 100%);
+  }
+  .bg-chatwave {
+    background: linear-gradient(135deg, #0a1a0e 0%, #0e1a2e 50%, #1a0e2e 100%);
+  }
+  .bg-dishdash {
+    background: linear-gradient(135deg, #1a0e0a 0%, #2e1a0e 50%, #1a0a0e 100%);
+  }
+</style>
+</head>
+<body class="text-on-surface font-body selection:bg-primary/30 min-h-screen">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 rounded-none border-b border-white/10 bg-zinc-950/40 backdrop-blur-xl shadow-[0_0_20px_rgba(0,240,255,0.05)]">
+  <div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+    <div class="text-xl font-black tracking-tighter text-cyan-400 font-['Space_Grotesk'] uppercase">
+      AYESHA.DEV
+    </div>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="index.html">Home</a>
+      <a class="text-primary font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase border-b-2 border-primary pb-1" href="work.html">Projects</a>
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="stack.html">Stack</a>
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="experience.html">Experience</a>
+    </div>
+    <a href="mailto:ayeshashahzad501@gmail.com" class="bg-primary text-on-primary-fixed font-['Space_Grotesk'] font-bold uppercase py-2 px-6 rounded-md hover:scale-95 transition-all duration-200">
+      Hire Me
+    </a>
+  </div>
+</nav>
+
+<main class="pt-36 pb-24 px-6 max-w-7xl mx-auto">
+
+  <!-- Header Section -->
+  <header class="mb-24 relative">
+    <div class="absolute -top-12 -left-12 w-64 h-64 bg-primary/5 blur-[120px] rounded-full"></div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-12">
+      <div class="max-w-3xl relative">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-12 h-[1px] bg-secondary"></span>
+          <span class="font-headline text-[11px] tracking-[0.4em] text-secondary uppercase font-bold">Project Repository 2025</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl font-headline font-black tracking-tighter text-on-surface leading-[0.9] mb-8">
+          DIGITAL <br/><span class="text-gradient">ARTIFACTS</span>
+        </h1>
+        <p class="text-on-surface-variant text-lg leading-relaxed max-w-xl border-l border-white/10 pl-6">
+          Building high-fidelity full-stack applications — from real-time communication platforms to AR-powered marketplaces. Each project is a story of engineering precision and clean UI.
+        </p>
+      </div>
+      <div class="hidden md:block text-right">
+        <div class="text-[10px] font-headline tracking-[0.3em] text-zinc-600 uppercase mb-2">System Load</div>
+        <div class="w-48 h-1 bg-zinc-900 rounded-full overflow-hidden">
+          <div class="w-2/3 h-full bg-primary animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Projects Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- Project Card 1 — BidSwap360 (Main) -->
+    <div class="lg:col-span-8 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="aspect-[21/9] relative overflow-hidden border-b border-white/5">
+          <video 
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%230e0e1a'/%3E%3Crect width='800' height='400' fill='url(%23gradient)' opacity='0.3'/%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a0a2e'/%3E%3Cstop offset='100%25' stop-color='%230a1a2e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='400' y='200' font-family='Arial' font-size='24' fill='%238ff5ff' text-anchor='middle' dominant-baseline='middle'%3EBidSwap360 Demo%3C/text%3E%3C/svg%3E">
+            <source src="bidswapp.mp4" type="video/mp4">
+            <source src="bidswap.webm" type="video/webm">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-cyan-900/20"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+            <span class="status-tag text-primary font-headline">STATUS: DEPLOYED</span>
+            <span class="status-tag text-zinc-500 font-headline border-zinc-700">FYP 2025</span>
+          </div>
+        </div>
+        <div class="p-10 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">view_in_ar</span>
+                <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">Marketplace / AR Integration</span>
+              </div>
+              <h3 class="text-4xl font-headline font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">BIDSWAP360</h3>
+            </div>
+            <div class="flex gap-3">
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center" href="https://github.com/ayshh1" target="_blank" title="Source Code">
+                <span class="material-symbols-outlined">code</span>
+              </a>
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center text-primary" href="#" title="Live Preview">
+                <span class="material-symbols-outlined">rocket_launch</span>
+              </a>
+            </div>
+          </div>
+          <p class="text-on-surface-variant leading-relaxed mb-10 max-w-2xl">
+            A full-stack marketplace for users to bid, barter, and buy furniture using 3D models and AR integration. Designed with Next.js and Tailwind CSS for a seamless seller-buyer experience, backed by a robust Node.js engine with computer vision and ML algorithms.
+          </p>
+          <div class="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6">
+            <div class="flex flex-wrap gap-4">
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Next.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Tailwind CSS
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Node.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> React
+              </span>
+            </div>
+            <a class="group/link flex items-center gap-3 text-[10px] font-headline font-bold tracking-[0.2em] text-primary uppercase" href="#">
+              View Project <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_right_alt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 2 — ChatWave (Secondary) -->
+    <div class="lg:col-span-4 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full border-secondary/20 hover:border-secondary/40">
+        <div class="h-40 relative overflow-hidden border-b border-white/5 bg-chatwave flex items-center justify-center">
+          <span class="material-symbols-outlined text-secondary/20" style="font-size:5rem;">forum</span>
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-blue-900/20"></div>
+          <div class="absolute bottom-3 left-4">
+            <span class="status-tag text-secondary font-headline border-secondary">STATUS: ACTIVE</span>
+          </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-secondary text-sm">forum</span>
+            <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">Real-Time / Chat</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold text-on-surface mb-4 tracking-tight group-hover:text-secondary transition-colors">CHATWAVE</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+            A real-time chat application with dynamic, responsive communication. Built with Socket.io for live messaging and Bootstrap for a seamless cross-device experience.
+          </p>
+          <div class="mt-auto">
+            <div class="flex gap-4 mb-6">
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">React</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">Socket.io</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">MongoDB</span>
+            </div>
+            <div class="flex gap-2">
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center" href="https://github.com/ayshh1" target="_blank">Repository</a>
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center text-secondary border-secondary/30" href="#">Live</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 3 — DishDash (Secondary) -->
+    <div class="lg:col-span-4 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full border-tertiary/20 hover:border-tertiary/40">
+        <div class="h-40 relative overflow-hidden border-b border-white/5 bg-dishdash flex items-center justify-center">
+          <span class="material-symbols-outlined text-tertiary/20" style="font-size:5rem;">restaurant</span>
+          <div class="absolute inset-0 bg-gradient-to-br from-orange-900/10 via-transparent to-pink-900/20"></div>
+          <div class="absolute bottom-3 left-4">
+            <span class="status-tag text-tertiary font-headline border-tertiary">STATUS: STABLE</span>
+          </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-tertiary text-sm">restaurant</span>
+            <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">Social / Recipe Platform</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold text-on-surface mb-4 tracking-tight group-hover:text-tertiary transition-colors">DISHDASH</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+            A full-stack recipe platform with user authentication, recipe search, collections management, and social sharing. State managed via Redux with smooth client-side routing.
+          </p>
+          <div class="mt-auto">
+            <div class="flex gap-4 mb-6">
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">React</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">Redux</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">Node.js</span>
+            </div>
+            <div class="flex gap-2">
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center" href="https://github.com/ayshh1" target="_blank">Repository</a>
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center text-tertiary border-tertiary/30" href="#">Preview</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 4 — Metric Work (Main) -->
+    <div class="lg:col-span-8 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="aspect-[21/9] relative overflow-hidden border-b border-white/5">
+          <video 
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%230a0a1a'/%3E%3Crect width='800' height='400' fill='url(%23gradient)' opacity='0.3'/%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230e1020'/%3E%3Cstop offset='100%25' stop-color='%230a1a0e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='400' y='200' font-family='Arial' font-size='24' fill='%238ff5ff' text-anchor='middle' dominant-baseline='middle'%3EMetric Platform Demo%3C/text%3E%3C/svg%3E">
+            <source src="metric-demo.mp4" type="video/mp4">
+            <source src="metric-demo.webm" type="video/webm">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/10 via-transparent to-purple-900/20"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+            <span class="status-tag text-primary font-headline">STATUS: PRODUCTION</span>
+            <span class="status-tag text-zinc-500 font-headline border-zinc-700">@ Metric AI</span>
+          </div>
+        </div>
+        <div class="p-10 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-primary text-sm">account_balance</span>
+                <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">FinTech / Full Stack</span>
+              </div>
+              <h3 class="text-4xl font-headline font-bold text-on-surface tracking-tight group-hover:text-primary transition-colors">METRIC.PLATFORM</h3>
+            </div>
+            <div class="flex gap-3">
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center text-primary" href="#" title="Live">
+                <span class="material-symbols-outlined">open_in_new</span>
+              </a>
+            </div>
+          </div>
+          <p class="text-on-surface-variant leading-relaxed mb-10 max-w-2xl">
+            AI-powered financial intelligence platform at Metric. Integrated QuickBooks, Zoho & Xero into financial workflows. Built and optimized backend APIs for financial data processing, reporting, and visualization — with 64+ unit tests written using Vitest.
+          </p>
+          <div class="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6">
+            <div class="flex flex-wrap gap-4">
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Next.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Node.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> MongoDB
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-primary"></span> Vitest
+              </span>
+            </div>
+            <a class="group/link flex items-center gap-3 text-[10px] font-headline font-bold tracking-[0.2em] text-primary uppercase" href="#">
+              View Platform <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">bolt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- Project Card 6 — SkillsSwap -->
+    <div class="lg:col-span-8 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="aspect-[21/9] relative overflow-hidden border-b border-white/5 bg-gradient-to-br from-[#1a0a0e] via-[#0e0a1a] to-[#0a100e] flex items-center justify-center">
+          <span class="material-symbols-outlined text-secondary/20" style="font-size:8rem;">storefront</span>
+          <div class="absolute inset-0 bg-gradient-to-br from-pink-900/10 via-transparent to-purple-900/20"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+            <span class="status-tag text-secondary font-headline" style="border-left-color:#d674ff;">STATUS: DEPLOYED</span>
+            <span class="status-tag text-zinc-500 font-headline border-zinc-700">Full Stack</span>
+          </div>
+        </div>
+        <div class="p-10 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-secondary text-sm">storefront</span>
+                <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">Community / Barter</span>
+              </div>
+              <h3 class="text-4xl font-headline font-bold text-on-surface tracking-tight group-hover:text-secondary transition-colors">SKILLSWAP</h3>
+            </div>
+            <div class="flex gap-3">
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center" href="https://github.com/ayshh1" target="_blank" title="Source Code">
+                <span class="material-symbols-outlined">code</span>
+              </a>
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center text-secondary" href="#" title="Live Preview" style="border-color:rgba(214,116,255,0.3);">
+                <span class="material-symbols-outlined">rocket_launch</span>
+              </a>
+            </div>
+          </div>
+          <p class="text-on-surface-variant leading-relaxed mb-10 max-w-2xl">
+            A peer-to-peer skill exchange platform where users trade skills instead of money. Offer what you know, get what you need — no cash required.
+          <div class="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6">
+            <div class="flex flex-wrap gap-4">
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-secondary"></span> Next.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-secondary"></span> Tailwind CSS
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-secondary"></span> MongoDB
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-secondary"></span> NextAuth
+              </span>
+            </div>
+            <a class="group/link flex items-center gap-3 text-[10px] font-headline font-bold tracking-[0.2em] text-secondary uppercase" href="#">
+              View Platform <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_right_alt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <!-- Project Card 7 — Novanest (Main) -->
+    <div class="lg:col-span-8 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full">
+        <div class="aspect-[21/9] relative overflow-hidden border-b border-white/5">
+          <video 
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%231a0a2e'/%3E%3Crect width='800' height='400' fill='url(%23gradient)' opacity='0.3'/%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230e1a2e'/%3E%3Cstop offset='100%25' stop-color='%230a0a2e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='400' y='200' font-family='Arial' font-size='24' fill='%23ac89ff' text-anchor='middle' dominant-baseline='middle'%3ENovanest Demo%3C/text%3E%3C/svg%3E">
+            <source src="novanest.mp4" type="video/mp4">
+            <source src="novanest.webm" type="video/webm">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-cyan-900/20"></div>
+          <div class="absolute top-4 right-4 flex gap-2">
+            <span class="status-tag text-tertiary font-headline" style="border-left-color:#ac89ff;">STATUS: DEPLOYED</span>
+            <span class="status-tag text-zinc-500 font-headline border-zinc-700">E-Commerce</span>
+          </div>
+        </div>
+        <div class="p-10 flex flex-col flex-grow">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="material-symbols-outlined text-tertiary text-sm">shopping_cart</span>
+                <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">E-Commerce / Full Stack</span>
+              </div>
+              <h3 class="text-4xl font-headline font-bold text-on-surface tracking-tight group-hover:text-tertiary transition-colors">NOVANEST</h3>
+            </div>
+            <div class="flex gap-3">
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center" href="https://github.com/ayshh1" target="_blank" title="Source Code">
+                <span class="material-symbols-outlined">code</span>
+              </a>
+              <a class="terminal-btn p-3 rounded-md flex items-center justify-center text-tertiary" href="#" title="Live Preview" style="border-color:rgba(172,137,255,0.3);">
+                <span class="material-symbols-outlined">rocket_launch</span>
+              </a>
+            </div>
+          </div>
+          <p class="text-on-surface-variant leading-relaxed mb-10 max-w-2xl">
+            Full-stack e-commerce platform built with Next.js for both frontend and backend, featuring product catalog, shopping cart, user authentication, and secure payment processing. Integrated MongoDB for robust data management and real-time inventory tracking.
+          </p>
+          <div class="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6">
+            <div class="flex flex-wrap gap-4">
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-tertiary"></span> Next.js
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-tertiary"></span> MongoDB
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-tertiary"></span> NextAuth
+              </span>
+              <span class="flex items-center gap-2 text-[10px] font-headline tracking-widest text-zinc-400 uppercase">
+                <span class="w-1 h-1 rounded-full bg-tertiary"></span> Stripe
+              </span>
+            </div>
+            <a class="group/link flex items-center gap-3 text-[10px] font-headline font-bold tracking-[0.2em] text-tertiary uppercase" href="#">
+              View Store <span class="material-symbols-outlined text-sm group-hover/link:translate-x-1 transition-transform">arrow_right_alt</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 8 — Assiraat (Secondary) -->
+    <div class="lg:col-span-4 group">
+      <div class="glass-card rounded-lg overflow-hidden flex flex-col h-full border-primary/20 hover:border-primary/40">
+        <div class="h-40 relative overflow-hidden border-b border-white/5">
+          <video 
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='160' viewBox='0 0 400 160'%3E%3Crect width='400' height='160' fill='%230a2a0e'/%3E%3Crect width='400' height='160' fill='url(%23gradient)' opacity='0.3'/%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230e1a2e'/%3E%3Cstop offset='100%25' stop-color='%230a0a2e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='200' y='80' font-family='Arial' font-size='14' fill='%238ff5ff' text-anchor='middle' dominant-baseline='middle'%3EAssiraat Platform%3C/text%3E%3C/svg%3E">
+            <source src="Assiraat-video.mp4" type="video/mp4">
+            <source src="Assiraat-video.webm" type="video/webm">
+          </video>
+          <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/10 via-transparent to-purple-900/20"></div>
+          <div class="absolute bottom-3 left-4">
+            <span class="status-tag text-primary font-headline">STATUS: ACTIVE</span>
+          </div>
+        </div>
+        <div class="p-8 flex flex-col flex-grow">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined text-primary text-sm">code</span>
+            <span class="text-[10px] font-headline tracking-widest text-zinc-500 uppercase">Coding Platform</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold text-on-surface mb-4 tracking-tight group-hover:text-primary transition-colors">ASSIRAAT</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-8">
+            HackerRank-like coding platform with real-time code execution, problem solving challenges, and competitive programming contests. Built with MERN stack for seamless coding experience.
+          </p>
+          <div class="mt-auto">
+            <div class="flex gap-4 mb-6">
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">MongoDB</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">Express.js</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">React</span>
+              <span class="text-[9px] font-headline tracking-[0.2em] text-zinc-500 uppercase">Node.js</span>
+            </div>
+            <div class="flex gap-2">
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center" href="https://github.com/ayshh1" target="_blank">Repository</a>
+              <a class="terminal-btn flex-1 py-3 text-[10px] font-headline font-bold uppercase tracking-widest text-center text-primary border-primary/30" href="#">Live</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-16 text-center">
+    <div class="text-[10px] font-headline tracking-[0.5em] text-zinc-700 uppercase">End of Featured Section</div>
+  </div>
+
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-16 border-t border-white/5 bg-black/40">
+  <div class="max-w-screen-2xl mx-auto px-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-4">
+        <div class="text-primary font-headline font-black tracking-tighter text-lg uppercase">AYESHA.DEV</div>
+        <div class="font-headline text-[10px] tracking-[0.3em] uppercase font-medium text-zinc-600">
+          © 2025 AYESHA SHAHZAD. ALL RIGHTS RESERVED.
+        </div>
+      </div>
+      <div class="flex md:justify-end gap-10">
+        <a class="font-headline text-[10px] tracking-[0.2em] uppercase text-zinc-500 hover:text-primary transition-all flex items-center gap-2" href="https://github.com/ayshh1" target="_blank">
+          <span class="w-1 h-1 rounded-full bg-zinc-800"></span> GITHUB
+        </a>
+        <a class="font-headline text-[10px] tracking-[0.2em] uppercase text-zinc-500 hover:text-primary transition-all flex items-center gap-2" href="https://linkedin.com/in/ayesha-shahzad25" target="_blank">
+          <span class="w-1 h-1 rounded-full bg-zinc-800"></span> LINKEDIN
+        </a>
+        <a class="font-headline text-[10px] tracking-[0.2em] uppercase text-zinc-500 hover:text-primary transition-all flex items-center gap-2" href="mailto:ayeshashahzad501@gmail.com">
+          <span class="w-1 h-1 rounded-full bg-zinc-800"></span> EMAIL
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth page transitions
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('active');
+    
+    // Add smooth transitions to all navigation links
+    const navLinks = document.querySelectorAll('a[href$=".html"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.hostname === window.location.hostname) {
+          e.preventDefault();
+          const target = this.getAttribute('href');
+          
+          // Fade out current page
+          document.body.style.opacity = '0';
+          document.body.style.transform = 'translateY(20px)';
+          
+          // Navigate after transition
+          setTimeout(() => {
+            window.location.href = target;
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
+
+</body></html>

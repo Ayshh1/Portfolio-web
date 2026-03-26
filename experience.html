@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-primary-container": "#005359",
+          "tertiary-fixed": "#bda1ff",
+          "surface-container-highest": "#25252d",
+          "error-container": "#9f0519",
+          "on-error-container": "#ffa8a3",
+          "surface-container": "#19191f",
+          "error": "#ff716c",
+          "primary": "#8ff5ff",
+          "primary-dim": "#00deec",
+          "tertiary-dim": "#874cff",
+          "primary-fixed-dim": "#00deec",
+          "secondary-container": "#9900cf",
+          "secondary-fixed": "#f1c1ff",
+          "tertiary-fixed-dim": "#b190ff",
+          "outline": "#76747b",
+          "on-tertiary-container": "#f8f1ff",
+          "outline-variant": "#48474d",
+          "tertiary-container": "#7000ff",
+          "surface-bright": "#2c2b33",
+          "on-background": "#f9f5fd",
+          "on-tertiary": "#290067",
+          "tertiary": "#ac89ff",
+          "background": "#0b0b0f",
+          "on-surface-variant": "#acaab1",
+          "surface-dim": "#0e0e13",
+          "on-secondary-fixed-variant": "#8400b3",
+          "secondary": "#d674ff",
+          "on-primary-fixed-variant": "#005e64",
+          "surface": "#0e0e13",
+          "surface-container-low": "#131319",
+          "secondary-fixed-dim": "#eaaeff",
+          "surface-container-lowest": "#000000",
+          "error-dim": "#d7383b",
+          "on-tertiary-fixed-variant": "#4700a7",
+          "on-secondary-container": "#fff5fc",
+          "on-primary": "#005d63",
+          "primary-container": "#00eefc",
+          "inverse-surface": "#fcf8ff",
+          "on-error": "#490006",
+          "on-tertiary-fixed": "#1f0052",
+          "on-secondary": "#390050",
+          "inverse-primary": "#006a71",
+          "on-surface": "#f9f5fd",
+          "surface-variant": "#25252d",
+          "on-primary-fixed": "#003f43",
+          "inverse-on-surface": "#55545b",
+          "primary-fixed": "#00eefc",
+          "surface-tint": "#8ff5ff",
+          "surface-container-high": "#1f1f26",
+          "secondary-dim": "#bb00fc",
+          "on-secondary-fixed": "#580079"
+        },
+        fontFamily: {
+          "headline": ["Space Grotesk"],
+          "body": ["Manrope"],
+          "label": ["Manrope"],
+          "mono": ["JetBrains Mono"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Smooth page transitions */
+  body {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-in-out;
+  }
+
+  .page-transition.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  a {
+    transition: all 0.3s ease;
+  }
+
+  .glass-card-premium {
+    background: linear-gradient(135deg, rgba(25, 25, 31, 0.7) 0%, rgba(14, 14, 19, 0.9) 100%);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(143, 245, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  }
+  .text-glow { text-shadow: 0 0 15px rgba(143, 245, 255, 0.4); }
+  .text-glow-purple { text-shadow: 0 0 15px rgba(214, 116, 255, 0.4); }
+  .data-link-line {
+    background: linear-gradient(180deg, transparent 0%, #8ff5ff 20%, #8ff5ff 40%, #d674ff 60%, #d674ff 80%, transparent 100%);
+  }
+  .hud-bracket {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: rgba(143, 245, 255, 0.4);
+  }
+  .hud-corner-tl { top: -2px; left: -2px; border-top: 2px solid; border-left: 2px solid; }
+  .hud-corner-tr { top: -2px; right: -2px; border-top: 2px solid; border-right: 2px solid; }
+  .hud-corner-bl { bottom: -2px; left: -2px; border-bottom: 2px solid; border-left: 2px solid; }
+  .hud-corner-br { bottom: -2px; right: -2px; border-bottom: 2px solid; border-right: 2px solid; }
+  .pulse-node {
+    box-shadow: 0 0 0 0 rgba(143, 245, 255, 0.7);
+    animation: node-pulse 2s infinite;
+  }
+  @keyframes node-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(143, 245, 255, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(143, 245, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(143, 245, 255, 0); }
+  }
+  .scan-line {
+    background: linear-gradient(to bottom, transparent, rgba(143, 245, 255, 0.05) 50%, transparent);
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f9f5fd;
+    -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 rounded-none border-b border-white/10 bg-zinc-950/40 backdrop-blur-xl shadow-[0_0_20px_rgba(0,240,255,0.05)]">
+  <div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+    <div class="text-xl font-black tracking-tighter text-cyan-400 font-['Space_Grotesk'] uppercase">
+      AYESHA.DEV
+    </div>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="index.html">Home</a>
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="work.html">Projects</a>
+      <a class="text-zinc-400 font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase" href="stack.html">Stack</a>
+      <a class="text-primary font-medium hover:text-white transition-colors font-['Space_Grotesk'] tracking-tight uppercase border-b-2 border-primary pb-1" href="experience.html">Experience</a>
+    </div>
+    <a href="mailto:ayeshashahzad501@gmail.com" class="bg-primary text-on-primary-fixed font-['Space_Grotesk'] font-bold uppercase py-2 px-6 rounded-md hover:scale-95 transition-all duration-200">
+      Hire Me
+    </a>
+  </div>
+</nav>
+
+<main class="relative overflow-hidden">
+  <!-- Background decorative elements -->
+  <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary/5 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 -z-10"></div>
+  <div class="absolute top-[40%] left-0 w-[600px] h-[600px] bg-primary/5 blur-[150px] rounded-full -translate-x-1/2 -z-10"></div>
+
+  <!-- Experience Timeline Section -->
+  <section class="pt-40 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-baseline mb-32 gap-6 relative">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="h-[1px] w-8 bg-primary"></span>
+          <span class="font-mono text-primary text-[10px] tracking-[0.3em] uppercase">SYSTEM_CHRONOLOGY // V.1.0</span>
+        </div>
+        <h2 class="font-headline text-6xl md:text-8xl font-black tracking-tighter text-glow leading-[0.85] uppercase">
+          CAREER<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-outline-variant to-outline-variant/30">LOGS_</span>
+        </h2>
+      </div>
+      <div class="font-mono text-[10px] text-on-surface-variant/60 leading-relaxed text-right uppercase tracking-widest border-l border-primary/20 pl-6">
+        <p>COORDINATE: 33.6844° N, 73.0479° E</p>
+        <p>STATUS: ACTIVE_OPERATIONS</p>
+        <p class="mt-4 text-on-surface-variant/80">Building full-stack systems<br/>with precision since 2023.</p>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] data-link-line opacity-20 -translate-x-1/2"></div>
+      <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[16px] border-x border-white/5 -translate-x-1/2"></div>
+
+      <!-- Timeline Item 1 — Metric Full Stack Engineer -->
+      <div class="relative mb-32 md:flex md:justify-end items-center group">
+        <div class="absolute left-6 md:left-1/2 w-3 h-3 bg-primary pulse-node rounded-none -translate-x-1/2 z-20 border border-white"></div>
+        <div class="absolute left-10 md:left-auto md:right-[52%] font-mono text-[10px] text-primary tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
+          0xMT01_FULLSTACK
+        </div>
+        <div class="ml-16 md:ml-0 md:w-[45%] relative">
+          <div class="hud-bracket hud-corner-tl"></div>
+          <div class="hud-bracket hud-corner-tr"></div>
+          <div class="hud-bracket hud-corner-bl"></div>
+          <div class="hud-bracket hud-corner-br"></div>
+          <div class="glass-card-premium p-8 group-hover:border-primary/40 transition-all duration-500">
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span class="font-mono text-secondary text-[10px] tracking-[0.2em] uppercase mb-2 block">06/2025 — PRESENT</span>
+                <h3 class="font-headline text-3xl font-black text-glow tracking-tight leading-tight">FULL STACK<br/>ENGINEER</h3>
+              </div>
+              <span class="material-symbols-outlined text-primary/40 text-4xl">monitoring</span>
+            </div>
+            <div class="flex items-center gap-2 mb-6">
+              <span class="w-1 h-1 bg-primary"></span>
+              <p class="font-mono text-primary text-[10px] uppercase tracking-widest">Metric — AI Financial Intelligence</p>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed mb-8 font-light">
+              Integrated QuickBooks, Zoho & Xero into financial workflows. Built and optimized backend APIs for financial data processing, reporting & visualization. Developing full-stack apps using Next.js, React, Node.js and MongoDB.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NEXT.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NODE.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">MONGODB</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">REACT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 2 — Metric Web Dev Intern -->
+      <div class="relative mb-32 md:flex md:justify-start items-center group">
+        <div class="absolute left-6 md:left-1/2 w-3 h-3 bg-secondary pulse-node rounded-none -translate-x-1/2 z-20 border border-white" style="animation-delay: 0.5s"></div>
+        <div class="absolute left-10 md:left-[52%] font-mono text-[10px] text-secondary tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
+          0xMT00_INTERN
+        </div>
+        <div class="ml-16 md:ml-0 md:w-[45%] relative">
+          <div class="hud-bracket hud-corner-tl"></div>
+          <div class="hud-bracket hud-corner-tr"></div>
+          <div class="hud-bracket hud-corner-bl"></div>
+          <div class="hud-bracket hud-corner-br"></div>
+          <div class="glass-card-premium p-8 group-hover:border-secondary/40 transition-all duration-500">
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span class="font-mono text-primary text-[10px] tracking-[0.2em] uppercase mb-2 block">06/2024 — 08/2024</span>
+                <h3 class="font-headline text-3xl font-black text-glow-purple tracking-tight leading-tight">WEB DEVELOPER<br/>INTERN</h3>
+              </div>
+              <span class="material-symbols-outlined text-secondary/40 text-4xl">terminal</span>
+            </div>
+            <div class="flex items-center gap-2 mb-6">
+              <span class="w-1 h-1 bg-secondary"></span>
+              <p class="font-mono text-secondary text-[10px] uppercase tracking-widest">Metric — AI Financial Intelligence</p>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed mb-8 font-light">
+              Built backend APIs and the CSV upload automation feature for data migration using Node.js & Next.js. Wrote 64+ unit tests with Vitest ensuring stability in production. Collaborated with QA and product teams to deliver seamless import workflows.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NODE.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NEXT.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">VITEST</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 3 — As-Siraat -->
+      <div class="relative mb-32 md:flex md:justify-end items-center group">
+        <div class="absolute left-6 md:left-1/2 w-3 h-3 bg-tertiary pulse-node rounded-none -translate-x-1/2 z-20 border border-white" style="animation-delay: 1s"></div>
+        <div class="absolute left-10 md:left-auto md:right-[52%] font-mono text-[10px] text-tertiary tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
+          0xAS01_MERN
+        </div>
+        <div class="ml-16 md:ml-0 md:w-[45%] relative">
+          <div class="hud-bracket hud-corner-tl"></div>
+          <div class="hud-bracket hud-corner-tr"></div>
+          <div class="hud-bracket hud-corner-bl"></div>
+          <div class="hud-bracket hud-corner-br"></div>
+          <div class="glass-card-premium p-8 group-hover:border-tertiary/40 transition-all duration-500">
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span class="font-mono text-secondary text-[10px] tracking-[0.2em] uppercase mb-2 block">09/2023 — 05/2024</span>
+                <h3 class="font-headline text-3xl font-black tracking-tight leading-tight">MERN STACK<br/>DEVELOPER</h3>
+              </div>
+              <span class="material-symbols-outlined text-tertiary/40 text-4xl">hub</span>
+            </div>
+            <div class="flex items-center gap-2 mb-6">
+              <span class="w-1 h-1 bg-tertiary"></span>
+              <p class="font-mono text-tertiary text-[10px] uppercase tracking-widest">As-Siraat — Islamabad</p>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed mb-8 font-light">
+              Built RESTful APIs and managed MongoDB schemas for a community web platform. Implemented React-based UI components alongside the UI/UX team. Participated in Agile sprints, code reviews, and bug fixing.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">REACT</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NODE.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">MONGODB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Item 4 — CodClause -->
+      <div class="relative mb-12 md:flex md:justify-start items-center group">
+        <div class="absolute left-6 md:left-1/2 w-3 h-3 bg-primary/60 pulse-node rounded-none -translate-x-1/2 z-20 border border-white" style="animation-delay: 1.5s"></div>
+        <div class="absolute left-10 md:left-[52%] font-mono text-[10px] text-primary/60 tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">
+          0xCC00_BACKEND
+        </div>
+        <div class="ml-16 md:ml-0 md:w-[45%] relative">
+          <div class="hud-bracket hud-corner-tl"></div>
+          <div class="hud-bracket hud-corner-tr"></div>
+          <div class="hud-bracket hud-corner-bl"></div>
+          <div class="hud-bracket hud-corner-br"></div>
+          <div class="glass-card-premium p-8 group-hover:border-primary/20 transition-all duration-500">
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <span class="font-mono text-primary/60 text-[10px] tracking-[0.2em] uppercase mb-2 block">07/2023 — 08/2023</span>
+                <h3 class="font-headline text-3xl font-black tracking-tight leading-tight">BACKEND<br/>INTERN</h3>
+              </div>
+              <span class="material-symbols-outlined text-primary/20 text-4xl">deployed_code</span>
+            </div>
+            <div class="flex items-center gap-2 mb-6">
+              <span class="w-1 h-1 bg-primary/60"></span>
+              <p class="font-mono text-primary/60 text-[10px] uppercase tracking-widest">CodClause — Remote</p>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed mb-8 font-light">
+              Developed backend architecture for a Face Detection web app using Node.js and MongoDB. Integrated OpenCV.js with real-time image detection endpoints. Ensured seamless frontend-backend integration.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">NODE.JS</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">MONGODB</span>
+              <span class="border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-[9px] text-on-surface-variant uppercase tracking-tighter">OPENCV.JS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-40 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+      <!-- Left Side -->
+      <div class="lg:col-span-5">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="h-[1px] w-8 bg-secondary"></span>
+          <span class="font-mono text-secondary text-[10px] tracking-[0.3em] uppercase">LINK_ESTABLISHMENT</span>
+        </div>
+        <h2 class="font-headline text-6xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-10 uppercase">
+          INITIATE<br/>A <span class="text-primary text-glow">COMMAND_</span>
+        </h2>
+        <p class="font-body text-on-surface-variant mb-16 max-w-sm leading-relaxed font-light">
+          Available for full-stack engineering roles, freelance projects, and technical collaborations. Let's build something great together.
+        </p>
+        <div class="grid gap-8">
+          <a class="flex items-center gap-6 group" href="mailto:ayeshashahzad501@gmail.com">
+            <div class="w-12 h-12 border border-primary/20 bg-primary/5 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-500">
+              <span class="material-symbols-outlined text-primary text-xl">alternate_email</span>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] text-zinc-600 uppercase tracking-widest mb-1">DATA_CHANNEL:MAIL</p>
+              <p class="font-headline font-bold text-lg tracking-tight group-hover:text-primary transition-colors">ayeshashahzad501@gmail.com</p>
+            </div>
+          </a>
+          <a class="flex items-center gap-6 group" href="https://github.com/ayshh1" target="_blank">
+            <div class="w-12 h-12 border border-secondary/20 bg-secondary/5 flex items-center justify-center group-hover:bg-secondary/20 transition-all duration-500">
+              <span class="material-symbols-outlined text-secondary text-xl">code</span>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] text-zinc-600 uppercase tracking-widest mb-1">SOURCE_REPO</p>
+              <p class="font-headline font-bold text-lg tracking-tight group-hover:text-secondary transition-colors">github.com/ayshh1</p>
+            </div>
+          </a>
+          <a class="flex items-center gap-6 group" href="https://linkedin.com/in/ayesha-shahzad25" target="_blank">
+            <div class="w-12 h-12 border border-tertiary/20 bg-tertiary/5 flex items-center justify-center group-hover:bg-tertiary/20 transition-all duration-500">
+              <span class="material-symbols-outlined text-tertiary text-xl">lan</span>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] text-zinc-600 uppercase tracking-widest mb-1">NETWORK_NODE</p>
+              <p class="font-headline font-bold text-lg tracking-tight group-hover:text-tertiary transition-colors">linkedin.com/in/ayesha-shahzad25</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side: Form -->
+      <div class="lg:col-span-7">
+        <div class="glass-card-premium p-10 md:p-14 relative group">
+          <div class="scan-line absolute inset-0 opacity-20"></div>
+          <div class="hud-corner-tl absolute top-0 left-0 border-primary w-6 h-6"></div>
+          <div class="hud-corner-tr absolute top-0 right-0 border-primary w-6 h-6"></div>
+          <div class="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(143,245,255,1)]"></div>
+              <span class="font-mono text-[10px] text-primary tracking-widest uppercase">TRANSMISSION_STATUS: READY</span>
+            </div>
+            <span class="font-mono text-[10px] text-on-surface-variant/40">ENC_TYPE: AES-256</span>
+          </div>
+          <form class="space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div class="relative">
+                <label class="font-mono text-[9px] text-primary/60 uppercase tracking-widest block mb-4">IDENTIFIER_NAME</label>
+                <div class="relative group">
+                  <div class="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-4 bg-primary/20"></div>
+                  <input class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-3 text-on-surface focus:ring-0 focus:border-primary transition-all font-mono text-sm placeholder:text-zinc-800" placeholder="NAME_REQUIRED" type="text"/>
+                </div>
+              </div>
+              <div class="relative">
+                <label class="font-mono text-[9px] text-primary/60 uppercase tracking-widest block mb-4">COMMS_CHANNEL</label>
+                <div class="relative">
+                  <div class="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-4 bg-primary/20"></div>
+                  <input class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-3 text-on-surface focus:ring-0 focus:border-primary transition-all font-mono text-sm placeholder:text-zinc-800" placeholder="ADDR_REQUIRED" type="email"/>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <label class="font-mono text-[9px] text-primary/60 uppercase tracking-widest block mb-4">OPERATION_TYPE</label>
+              <div class="relative">
+                <div class="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-4 bg-primary/20"></div>
+                <select class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-3 text-on-surface focus:ring-0 focus:border-primary transition-all font-mono text-sm">
+                  <option class="bg-black">FULL_STACK_DEV</option>
+                  <option class="bg-black">FRONTEND_ENGINEER</option>
+                  <option class="bg-black">BACKEND_API</option>
+                  <option class="bg-black">FREELANCE_PROJECT</option>
+                </select>
+              </div>
+            </div>
+            <div class="relative">
+              <label class="font-mono text-[9px] text-primary/60 uppercase tracking-widest block mb-4">CORE_REQUIREMENTS</label>
+              <div class="relative">
+                <div class="absolute -left-2 top-8 w-1 h-8 bg-primary/20"></div>
+                <textarea class="w-full bg-transparent border-0 border-b border-white/10 px-0 py-3 text-on-surface focus:ring-0 focus:border-primary transition-all font-mono text-sm placeholder:text-zinc-800 resize-none" placeholder="DEFINE_PARAMETERS..." rows="4"></textarea>
+              </div>
+            </div>
+            <button class="w-full group relative overflow-hidden bg-primary text-on-primary font-headline font-black uppercase tracking-[0.2em] text-sm py-6 transition-all hover:scale-[0.98] duration-300" type="submit">
+              <span class="relative z-10 flex items-center justify-center gap-3">
+                EXECUTE_TRANSMIT
+                <span class="material-symbols-outlined text-lg">bolt</span>
+              </span>
+              <div class="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 opacity-20"></div>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="w-full py-16 border-t border-white/5 bg-black">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 gap-10 max-w-screen-2xl mx-auto">
+    <div class="font-mono text-[9px] tracking-[0.3em] uppercase font-light text-zinc-600 flex items-center gap-4">
+      <span class="w-4 h-[1px] bg-zinc-800"></span>
+      © 2025 AYESHA SHAHZAD // ALL_RIGHTS_RESERVED
+    </div>
+    <div class="flex gap-12">
+      <a class="font-mono text-[9px] tracking-[0.3em] uppercase font-light text-zinc-600 hover:text-primary transition-all duration-300" href="https://github.com/ayshh1" target="_blank">GITHUB</a>
+      <a class="font-mono text-[9px] tracking-[0.3em] uppercase font-light text-zinc-600 hover:text-secondary transition-all duration-300" href="https://linkedin.com/in/ayesha-shahzad25" target="_blank">LINKEDIN</a>
+      <a class="font-mono text-[9px] tracking-[0.3em] uppercase font-light text-zinc-600 hover:text-tertiary transition-all duration-300" href="mailto:ayeshashahzad501@gmail.com">EMAIL</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth page transitions
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('active');
+    
+    // Add smooth transitions to all navigation links
+    const navLinks = document.querySelectorAll('a[href$=".html"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.hostname === window.location.hostname) {
+          e.preventDefault();
+          const target = this.getAttribute('href');
+          
+          // Fade out current page
+          document.body.style.opacity = '0';
+          document.body.style.transform = 'translateY(20px)';
+          
+          // Navigate after transition
+          setTimeout(() => {
+            window.location.href = target;
+          }, 300);
+        }
+      });
+    });
+  });
+</script>
+</body></html>
