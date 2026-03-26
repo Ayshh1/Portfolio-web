@@ -22,6 +22,18 @@
     {
       "src": "/stack",
       "dest": "/stack.html"
+    },
+    {
+      "src": "/work.html",
+      "dest": "/work"
+    },
+    {
+      "src": "/experience.html",
+      "dest": "/experience"
+    },
+    {
+      "src": "/stack.html",
+      "dest": "/stack"
     }
   ]
 }
